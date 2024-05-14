@@ -100,7 +100,7 @@ const Form = () => {
             </div>
             <div>
                 <label>Rua/Logradouro</label>
-                <input type="text" name="rua" value={endereco.rua} readOnly={endereco.rua !== ''} required />
+                <input type="text" name="rua" value={endereco.rua} readOnly={cep.length === 8} onChange={handleInputChange} required />
             </div>
             <div>
                 <label>Número</label>
@@ -112,15 +112,15 @@ const Form = () => {
             </div>
             <div>
                 <label>Bairro</label>
-                <input type="text" name="bairro" value={endereco.bairro} readOnly={endereco.bairro !== ''} required />
+                <input type="text" name="bairro" value={endereco.bairro} readOnly={cep.length === 8} onChange={handleInputChange} required />
             </div>
             <div>
                 <label>Cidade</label>
-                <input type="text" name="cidade" value={endereco.cidade} readOnly={endereco.cidade !== ''} required />
+                <input type="text" name="cidade" value={endereco.cidade} readOnly={cep.length === 8} onChange={handleInputChange} required />
             </div>
             <div>
                 <label>Estado</label>
-                <input type="text" name="estado" value={endereco.estado} readOnly={endereco.estado !== ''} required />
+                <input type="text" name="estado" value={endereco.estado} readOnly={cep.length === 8} onChange={handleInputChange} required />
             </div>
             <div>
                 <label>País</label>
@@ -130,5 +130,6 @@ const Form = () => {
         </form>
     );
 };
+
 
 export default Form;
