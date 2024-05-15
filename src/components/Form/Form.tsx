@@ -1,5 +1,7 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import { useViaCepService, Endereco } from '../../services/api';
+import Link from "next/link";
 
 const Form = () => {
     const { getAddress } = useViaCepService();
@@ -138,7 +140,7 @@ const Form = () => {
         };
 
         try {
-            const response = await fetch('/sua-rota-de-backend', {
+            const response = await fetch('/result', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -155,6 +157,7 @@ const Form = () => {
             console.error('Erro ao enviar dados:', error);
         }
     };
+
 
     return (
         <form onSubmit={handleSubmit}>
@@ -255,7 +258,7 @@ const Form = () => {
                 />
                 {errors.pais && touchedFields.pais && <span>{errors.pais}</span>}
             </div>
-            <button type="submit" disabled={!isFormValid}>Enviar</button>
+            <button type="submit" disabled={!isFormValid}><Link href={"/result"}>Enviar</Link></button>
         </form>
     );
 };
