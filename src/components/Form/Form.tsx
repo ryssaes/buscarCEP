@@ -19,6 +19,7 @@ const Form = () => {
     const [errors, setErrors] = useState<any>({});
     const [touchedFields, setTouchedFields] = useState<any>({});
     const [isFormValid, setIsFormValid] = useState(false);
+    const [isLinkVisible, setIsLinkVisible] = useState(false);
 
     const validateField = (name: string, value: string) => {
         let errorMsg = '';
@@ -36,9 +37,7 @@ const Form = () => {
             } else if (!value.trim()) {
                 errorMsg = 'Este campo é obrigatório';
             }
-        } else if (!value.trim() && name !== 'complemento') {
-            errorMsg = 'Este campo é obrigatório';
-        }
+        } 
         setErrors((prevErrors: any) => ({
             ...prevErrors,
             [name]: errorMsg
@@ -55,6 +54,10 @@ const Form = () => {
         });
         setIsFormValid(isValid);
     };
+
+    useEffect(() => {
+        setIsLinkVisible(isFormValid); // Define a visibilidade do link com base na validação do formulário
+    }, [isFormValid]);
 
     useEffect(() => {
         validateForm();
@@ -130,34 +133,12 @@ const Form = () => {
         });
         validateForm();
 
-        if (!isFormValid) {
-            return;
-        }
-
         const formData = {
             cep,
             ...endereco
         };
 
-        try {
-            const response = await fetch('/result', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
-                console.log('Dados enviados com sucesso!');
-            } else {
-                console.error('Erro ao enviar dados:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Erro ao enviar dados:', error);
-        }
     };
-
 
     return (
         <form onSubmit={handleSubmit}>
@@ -258,7 +239,9 @@ const Form = () => {
                 />
                 {errors.pais && touchedFields.pais && <span>{errors.pais}</span>}
             </div>
-            <button type="submit" disabled={!isFormValid}><Link href={"/result"}>Enviar</Link></button>
+            <button type="submit" disabled={!isFormValid}>
+                <Link href={"/result"} style={{ display: isLinkVisible ? 'inline' : 'none' }}>Enviar</Link>
+            </button>
         </form>
     );
 };
