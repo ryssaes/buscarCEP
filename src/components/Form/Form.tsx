@@ -1,9 +1,9 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { useViaCepService, Endereco } from '../../services/api';
-import Link from "next/link";
 import TextInput from '../TextInput/TextInput';
 import AddressField from '../AddressField/AddressField';
+import InfoBox from '../InfoBox/InfoBox';
 
 const Form = () => {
     const { getAddress } = useViaCepService();
@@ -21,7 +21,8 @@ const Form = () => {
     const [errors, setErrors] = useState<any>({});
     const [touchedFields, setTouchedFields] = useState<any>({});
     const [isFormValid, setIsFormValid] = useState(false);
-    const [isLinkVisible, setIsLinkVisible] = useState(false);
+    const [showInfoBox, setShowInfoBox] = useState(false); // Estado para controlar a exibição da caixa de informações
+    const [formData, setFormData] = useState<any>(null); // Estado para armazenar os dados do formulário submetido
 
     const validateField = (name: string, value: string) => {
         let errorMsg = '';
@@ -56,10 +57,6 @@ const Form = () => {
         });
         setIsFormValid(isValid);
     };
-
-    useEffect(() => {
-        setIsLinkVisible(isFormValid);
-    }, [isFormValid]);
 
     useEffect(() => {
         validateForm();
@@ -140,10 +137,12 @@ const Form = () => {
             ...endereco
         };
 
-        console.log('Form Data:', data);
+        setFormData(data); // Armazenar os dados do formulário submetido
+        setShowInfoBox(true); // Mostrar a caixa de informações
     };
 
     return (
+        <div>
         <form onSubmit={handleSubmit}>
             <TextInput
                 label="CEP"
@@ -179,6 +178,7 @@ const Form = () => {
                 name="complemento"
                 value={endereco.complemento}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
                 error={errors.complemento && touchedFields.complemento && errors.complemento}
             />
 
@@ -218,9 +218,19 @@ const Form = () => {
                 error={errors.estado && touchedFields.estado && errors.estado}
             />
             <button type="submit" disabled={!isFormValid}>
-                <Link href={"/result"} style={{ display: isLinkVisible ? 'inline' : 'none' }}>Enviar</Link>
+                Enviar
             </button>
         </form>
+        {showInfoBox && formData && (
+                <InfoBox
+                    formData={formData}
+                    onClose={() => setShowInfoBox(false)} // Função para fechar a caixa de informações
+                />
+            )}
+
+            {/* Estilização para o degradê preto */}
+            {showInfoBox && <div className="black-gradient"></div>}
+        </div>
     );
 };
 

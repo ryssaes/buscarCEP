@@ -1,3 +1,5 @@
+
+
 export const metadata = {
   title: 'BuscarCEP',
   description: 'Buscador de CEP',
@@ -10,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body style={{ backgroundImage: "url('./background.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}>{children}</body>
     </html>
   )
 }
