@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useViaCepService, Endereco } from '../../services/api';
 import Link from "next/link";
+import TextInput from '../TextInput/TextInput';
+import AddressField from '../AddressField/AddressField';
 
 const Form = () => {
     const { getAddress } = useViaCepService();
@@ -37,7 +39,7 @@ const Form = () => {
             } else if (!value.trim()) {
                 errorMsg = 'Este campo é obrigatório';
             }
-        } 
+        }
         setErrors((prevErrors: any) => ({
             ...prevErrors,
             [name]: errorMsg
@@ -56,7 +58,7 @@ const Form = () => {
     };
 
     useEffect(() => {
-        setIsLinkVisible(isFormValid); // Define a visibilidade do link com base na validação do formulário
+        setIsLinkVisible(isFormValid);
     }, [isFormValid]);
 
     useEffect(() => {
@@ -133,112 +135,88 @@ const Form = () => {
         });
         validateForm();
 
-        const formData = {
+        const data = {
             cep,
             ...endereco
         };
 
+        console.log('Form Data:', data);
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <label>CEP</label>
-                <input
-                    type="text"
-                    name="cep"
-                    value={cep}
-                    onChange={handleCepChange}
-                    onBlur={handleBlur}
-                />
-                {erroCep && <span>{erroCep}</span>}
-                {errors.cep && touchedFields.cep && <span>{errors.cep}</span>}
-            </div>
-            <div>
-                <label>Rua/Logradouro</label>
-                <input
-                    type="text"
-                    name="rua"
-                    value={endereco.rua}
-                    readOnly={cep.length === 8}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    required
-                />
-                {errors.rua && touchedFields.rua && <span>{errors.rua}</span>}
-            </div>
-            <div>
-                <label>Número</label>
-                <input
-                    type="text"
-                    name="numero"
-                    value={endereco.numero}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    required
-                />
-                {errors.numero && touchedFields.numero && <span>{errors.numero}</span>}
-            </div>
-            <div>
-                <label>Complemento</label>
-                <input
-                    type="text"
-                    name="complemento"
-                    value={endereco.complemento}
-                    onChange={handleInputChange}
-                />
-                {errors.complemento && touchedFields.complemento && <span>{errors.complemento}</span>}
-            </div>
-            <div>
-                <label>Bairro</label>
-                <input
-                    type="text"
-                    name="bairro"
-                    value={endereco.bairro}
-                    readOnly={cep.length === 8}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    required
-                />
-                {errors.bairro && touchedFields.bairro && <span>{errors.bairro}</span>}
-            </div>
-            <div>
-                <label>Cidade</label>
-                <input
-                    type="text"
-                    name="cidade"
-                    value={endereco.cidade}
-                    readOnly={cep.length === 8}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    required
-                />
-                {errors.cidade && touchedFields.cidade && <span>{errors.cidade}</span>}
-            </div>
-            <div>
-                <label>Estado</label>
-                <input
-                    type="text"
-                    name="estado"
-                    value={endereco.estado}
-                    readOnly={cep.length === 8}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    required
-                />
-                {errors.estado && touchedFields.estado && <span>{errors.estado}</span>}
-            </div>
-            <div>
-                <label>País</label>
-                <input
-                    type="text"
-                    name="pais"
-                    value={endereco.pais}
-                    readOnly
-                    required
-                />
-                {errors.pais && touchedFields.pais && <span>{errors.pais}</span>}
-            </div>
+            <TextInput
+                label="CEP"
+                name="cep"
+                value={cep}
+                onChange={handleCepChange}
+                onBlur={handleBlur}
+                error={erroCep || (errors.cep && touchedFields.cep && errors.cep)}
+            />
+            <AddressField
+                label="Rua/Logradouro"
+                name="rua"
+                value={endereco.rua}
+                disabled={cep.length !== 8 || !!erroCep}
+                readOnly={cep.length === 8 && !erroCep}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                required
+                error={errors.rua && touchedFields.rua && errors.rua}
+            />
+            <AddressField
+                label="Número"
+                name="numero"
+                value={endereco.numero}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                required
+                error={errors.numero && touchedFields.numero && errors.numero}
+            />
+
+            <AddressField
+                label="Complemento"
+                name="complemento"
+                value={endereco.complemento}
+                onChange={handleInputChange}
+                error={errors.complemento && touchedFields.complemento && errors.complemento}
+            />
+
+            <AddressField
+                label="Bairro"
+                name="bairro"
+                value={endereco.bairro}
+                disabled={cep.length !== 8 || !!erroCep}
+                readOnly={cep.length === 8 && !erroCep}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                required
+                error={errors.bairro && touchedFields.bairro && errors.bairro}
+            />
+
+            <AddressField
+                label="Cidade"
+                name="cidade"
+                value={endereco.cidade}
+                disabled={cep.length !== 8 || !!erroCep}
+                readOnly={cep.length === 8 && !erroCep}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                required
+                error={errors.cidade && touchedFields.cidade && errors.cidade}
+            />
+
+            <AddressField
+                label="Estado"
+                name="estado"
+                value={endereco.estado}
+                disabled={cep.length !== 8 || !!erroCep}
+                readOnly={cep.length === 8 && !erroCep}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                required
+                error={errors.estado && touchedFields.estado && errors.estado}
+            />
             <button type="submit" disabled={!isFormValid}>
                 <Link href={"/result"} style={{ display: isLinkVisible ? 'inline' : 'none' }}>Enviar</Link>
             </button>
