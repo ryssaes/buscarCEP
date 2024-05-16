@@ -26,8 +26,6 @@ const TextInput: React.FC<TextInputProps> = ({
     error,
     touched,
 }) => {
-    console.log("Error:", error); // Adiciona este console.log()
-    console.log("Touched:", touched); // Adiciona este console.log()
     return (
         <div className={style.textInputContainer}>
             <label>{label}</label>

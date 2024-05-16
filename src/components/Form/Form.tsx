@@ -4,7 +4,7 @@ import { useViaCepService, Endereco } from '../../services/api';
 import TextInput from '../TextInput/TextInput';
 import AddressField from '../AddressField/AddressField';
 import InfoBox from '../InfoBox/InfoBox';
-import styles from './Form.module.css'; 
+import styles from './Form.module.css';
 
 const Form = () => {
     const { getAddress } = useViaCepService();
@@ -22,8 +22,9 @@ const Form = () => {
     const [errors, setErrors] = useState<any>({});
     const [touchedFields, setTouchedFields] = useState<any>({});
     const [isFormValid, setIsFormValid] = useState(false);
-    const [showInfoBox, setShowInfoBox] = useState(false); 
+    const [showInfoBox, setShowInfoBox] = useState(false);
     const [formData, setFormData] = useState<any>(null);
+
 
     const validateField = (name: string, value: string) => {
         let errorMsg = '';
@@ -58,6 +59,7 @@ const Form = () => {
         });
         setIsFormValid(isValid);
     };
+
 
     useEffect(() => {
         validateForm();
@@ -99,6 +101,28 @@ const Form = () => {
         }
     };
 
+    const generateErrorMessage = () => {
+        let errorMessage = 'Por favor, preencha os seguintes campos:';
+        if (!endereco.rua.trim()) {
+            errorMessage += ' Rua/Logradouro,';
+        }
+        if (!endereco.numero.trim()) {
+            errorMessage += ' Número,';
+        }
+        if (!endereco.bairro.trim()) {
+            errorMessage += ' Bairro,';
+        }
+        if (!endereco.cidade.trim()) {
+            errorMessage += ' Cidade,';
+        }
+        if (!endereco.estado.trim()) {
+            errorMessage += ' Estado,';
+        }
+        errorMessage = errorMessage.slice(0, -1);
+        return errorMessage;
+    };
+    
+
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setEndereco((prevState) => ({
@@ -121,6 +145,7 @@ const Form = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
         setTouchedFields({
             cep: true,
             rua: true,
@@ -138,8 +163,8 @@ const Form = () => {
             ...endereco
         };
 
-        setFormData(data); 
-        setShowInfoBox(true); 
+        setFormData(data);
+        setShowInfoBox(true);
     };
 
     return (
@@ -232,22 +257,24 @@ const Form = () => {
                         value={endereco.pais}
                         disabled
                         readOnly
-                        onChange={() => { }} 
-                        onBlur={() => { }} 
+                        onChange={() => { }}
+                        onBlur={() => { }}
                     />
 
                     <button className={styles.submitButton} type="submit" disabled={!isFormValid}>
                         Enviar
                     </button>
+                    {!isFormValid && (
+                        <p className={styles.errorMsg}>{generateErrorMessage()}</p>
+                    )}
+
                 </form>
             </div>
             {showInfoBox && formData && (
-                <div className={styles.infoBox}>
-                    <InfoBox
-                        formData={formData}
-                        onClose={() => setShowInfoBox(false)} 
-                    />
-                </div>
+                <InfoBox
+                    formData={formData}
+                    onClose={() => setShowInfoBox(false)}
+                />
             )}
         </div>
     );
