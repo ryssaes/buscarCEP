@@ -1,9 +1,6 @@
-.infoboxContainer {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
+.infoboxcontainer {
+    display: flex;
+    margin: 15px 0;
 }
 
 .infobox {
@@ -44,4 +41,9 @@
 
 .infobox button:hover {
     background-color: rgb(62, 165, 86);
+}
+
+
+@media screen and (max-width: 925px) {
+    
 }
