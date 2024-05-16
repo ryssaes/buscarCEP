@@ -1,17 +1,10 @@
 :root {
     --font-primary: 'Montserrat', sans-serif; /* Define a fonte primária */
-    --color-text: #fff; /* Define a cor do texto para branco */
-    --color-link: #00CED1; /* Define a cor dos links como azul turquesa */
-    --color-green: #32CD32; /* Verde limão */
-    --color-gold: #FFD700; /* Amarelo ouro */
-    --color-pink: #FF1493; /* Rosa choque */
-    --color-purple: #8A2BE2; /* Roxo profundo */
 }
 
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
     font-family: var(--font-primary);
 }

@@ -24,16 +24,12 @@
     margin-bottom: 20px;
 }
 
-/* Estilo para inputs com erro */
-.inputField input.error {
-    border-color: #ff0000;
-}
 
 .submitButton {
     display: block;
     width: 100%;
     padding: 10px 0;
-    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    background: linear-gradient(90deg, rgba(199,244,124,1) 0%, rgba(171,211,108,1) 48%, rgba(92,178,112,1) 100%);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -42,5 +38,5 @@
 }
 
 .submitButton:hover {
-    background: linear-gradient(90deg, rgba(131,58,180,0.8) 0%, rgba(253,29,29,0.8) 50%, rgba(252,176,69,0.8) 100%);
+    background: linear-gradient(90deg, rgb(180, 219, 116) 0%, rgb(182, 219, 123) 48%, rgb(102, 187, 122) 100%);
 }

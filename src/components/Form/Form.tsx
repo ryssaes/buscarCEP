@@ -226,6 +226,16 @@ const Form = () => {
                         error={errors.estado && touchedFields.estado && errors.estado}
                         touched={touchedFields.estado}
                     />
+                    <AddressField
+                        label="País"
+                        name="pais"
+                        value={endereco.pais}
+                        disabled
+                        readOnly
+                        onChange={() => { }} // Adiciona uma função vazia para o onChange
+                        onBlur={() => { }} // Adiciona uma função vazia para o onBlur
+                    />
+
                     <button className={styles.submitButton} type="submit" disabled={!isFormValid}>
                         Enviar
                     </button>

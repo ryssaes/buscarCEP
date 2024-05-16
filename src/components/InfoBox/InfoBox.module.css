@@ -7,7 +7,7 @@
 }
 
 .infobox {
-    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) -5%, rgba(252, 176, 69, 1) 136%);
+    background: linear-gradient(90deg, rgba(199,244,124,1) 0%, rgba(171,211,108,1) 48%, rgba(92,178,112,1) 100%);
     color: white;
     padding: 20px;
     border-radius: 8px;
@@ -32,14 +32,15 @@
     display: block;
     margin: 20px auto 0;
     padding: 10px 20px;
-    background-color: #0056b3;
+    background-color: rgba(92,178,112,1);
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.1);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+    transition: background-color 0.3s ease; 
 }
 
 .infobox button:hover {
-    background-color: #004080; /* Cor de fundo ao passar o mouse */
+    background-color: rgb(62, 165, 86);
 }
