@@ -8,6 +8,7 @@ export const validateNumero = (numero: string): boolean => {
     return /^\d+$/.test(numero);
 };
 
-export const validateAlphabetic = (value: string): boolean => {
-    return /^[a-zA-Z\s]+$/.test(value.trim());
+export const validateAlphabetic = (value: string) => {
+    return /^[^\d]+$/.test(value); 
 };
+

@@ -41,7 +41,7 @@ const Form: React.FC = () => {
                 errorMsg = 'Número inválido. Deve conter apenas dígitos numéricos.';
             }
         } else if (name === 'rua' || name === 'bairro' || name === 'cidade' || name === 'estado') {
-            if (!validateAlphabetic(value)) {
+            if (!/^[^\d]+$/.test(value)) {
                 errorMsg = 'Este campo deve conter apenas letras.';
             } else if (!value.trim()) {
                 errorMsg = 'Este campo é obrigatório';
@@ -53,6 +53,7 @@ const Form: React.FC = () => {
         }));
         return errorMsg === '';
     };
+    
 
     const validateForm = () => {
         let isValid = true;
