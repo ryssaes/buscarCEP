@@ -41,9 +41,3 @@
 .submitButton:hover {
     background: linear-gradient(90deg, rgb(180, 219, 116) 0%, rgb(182, 219, 123) 48%, rgb(102, 187, 122) 100%);
 }
-
-.errorMsg{
-    margin-top: 15px;
-    color:  black;
-    font-weight: 500;
-}

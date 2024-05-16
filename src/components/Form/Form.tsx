@@ -4,6 +4,7 @@ import { useViaCepService, Endereco } from '../../services/api';
 import TextInput from '../TextInput/TextInput';
 import AddressField from '../AddressField/AddressField';
 import InfoBox from '../InfoBox/InfoBox';
+import FormErrorMessage from '../FormErrorMessage/FormErrorMessage';
 import styles from './Form.module.css';
 
 const Form = () => {
@@ -100,28 +101,6 @@ const Form = () => {
             setErroCep('');
         }
     };
-
-    const generateErrorMessage = () => {
-        let errorMessage = 'Por favor, preencha os seguintes campos:';
-        if (!endereco.rua.trim()) {
-            errorMessage += ' Rua/Logradouro,';
-        }
-        if (!endereco.numero.trim()) {
-            errorMessage += ' Número,';
-        }
-        if (!endereco.bairro.trim()) {
-            errorMessage += ' Bairro,';
-        }
-        if (!endereco.cidade.trim()) {
-            errorMessage += ' Cidade,';
-        }
-        if (!endereco.estado.trim()) {
-            errorMessage += ' Estado,';
-        }
-        errorMessage = errorMessage.slice(0, -1);
-        return errorMessage;
-    };
-    
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -264,10 +243,7 @@ const Form = () => {
                     <button className={styles.submitButton} type="submit" disabled={!isFormValid}>
                         Enviar
                     </button>
-                    {!isFormValid && (
-                        <p className={styles.errorMsg}>{generateErrorMessage()}</p>
-                    )}
-
+                    <FormErrorMessage endereco={endereco} />
                 </form>
             </div>
             {showInfoBox && formData && (
