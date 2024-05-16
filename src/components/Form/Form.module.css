@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.formContainer {
+    background-color: rgba(255, 255, 255, 0.95); /* Ajustando a opacidade para um branco mais suave */
+    padding: 30px; /* Aumentando o espaçamento interno */
+    border-radius: 15px; /* Arredondando um pouco mais as bordas */
+    transition: transform 0.5s ease;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Adicionando uma sombra mais suave e elevada */
+}
+
+
+.moveLeft {
+    transform: translateX(-1%);
+}
+.inputField {
+    margin-bottom: 20px;
+}
+
+/* Estilo para inputs com erro */
+.inputField input.error {
+    border-color: #ff0000;
+}
+
+.submitButton {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    background: linear-gradient(90deg, rgba(131,58,180,0.8) 0%, rgba(253,29,29,0.8) 50%, rgba(252,176,69,0.8) 100%);
+}

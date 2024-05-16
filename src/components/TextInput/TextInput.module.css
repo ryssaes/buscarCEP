@@ -1,0 +1,33 @@
+.textInputContainer {
+    margin-bottom: 20px;
+}
+
+.textInputContainer label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333; /* Cor do texto do rótulo */
+}
+
+.textInputContainer input {
+    width: 94%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Cor da borda do input */
+    border-radius: 5px;
+    background-color: #fff; /* Cor do fundo do input */
+    transition: border-color 0.3s ease; /* Transição suave para a cor da borda */
+}
+
+.textInputContainer input:focus {
+    outline: none; /* Remove a borda de foco padrão */
+    border-color: #007bff; /* Cor da borda ao focar */
+}
+
+.textInputContainer input.error {
+    border-color: #ff0000; /* Cor da borda em caso de erro */
+}
+
+.textInputContainer .errormessage {
+    color: #ff0000; /* Cor do texto de erro */
+    font-size: 12px;
+}

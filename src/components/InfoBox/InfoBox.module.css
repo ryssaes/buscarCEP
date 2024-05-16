@@ -1,0 +1,45 @@
+.infoboxContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.infobox {
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) -5%, rgba(252, 176, 69, 1) 136%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 9px 9px 2px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    height: 400px;
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+}
+
+.infobox h2 {
+    margin-top: 0;
+    color: white;
+}
+
+.infobox p {
+    margin: 10px 0;
+}
+
+.infobox button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+}
+
+.infobox button:hover {
+    background-color: #004080; /* Cor de fundo ao passar o mouse */
+}

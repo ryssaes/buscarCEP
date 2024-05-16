@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './TextInput.module.css'
 
 interface TextInputProps {
     label: string;
@@ -26,7 +27,7 @@ const TextInput: React.FC<TextInputProps> = ({
     touched,
 }) => {
     return (
-        <div>
+        <div className={style.textInputContainer}>
             <label>{label}</label>
             <input
                 type="text"
@@ -38,7 +39,7 @@ const TextInput: React.FC<TextInputProps> = ({
                 onBlur={onBlur}
                 required={required}
             />
-            {error && touched && <span>{error}</span>}
+            {error && touched && <span className={style.errormessage}>{error}</span>}
         </div>
     );
 };

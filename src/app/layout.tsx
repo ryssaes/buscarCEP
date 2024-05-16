@@ -1,4 +1,4 @@
-
+import '../styles/globals.css';
 
 export const metadata = {
   title: 'BuscarCEP',
@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ backgroundImage: "url('./background.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }

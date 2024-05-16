@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import { useViaCepService, Endereco } from '../../services/api';
 import TextInput from '../TextInput/TextInput';
 import AddressField from '../AddressField/AddressField';
 import InfoBox from '../InfoBox/InfoBox';
+import styles from './Form.module.css'; // Usando CSS Modules
 
 const Form = () => {
     const { getAddress } = useViaCepService();
@@ -142,94 +143,95 @@ const Form = () => {
     };
 
     return (
-        <div>
-        <form onSubmit={handleSubmit}>
-            <TextInput
-                label="CEP"
-                name="cep"
-                value={cep}
-                onChange={handleCepChange}
-                onBlur={handleBlur}
-                error={erroCep || (errors.cep && touchedFields.cep && errors.cep)}
-            />
-            <AddressField
-                label="Rua/Logradouro"
-                name="rua"
-                value={endereco.rua}
-                disabled={cep.length !== 8 || !!erroCep}
-                readOnly={cep.length === 8 && !erroCep}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                required
-                error={errors.rua && touchedFields.rua && errors.rua}
-            />
-            <AddressField
-                label="Número"
-                name="numero"
-                value={endereco.numero}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                required
-                error={errors.numero && touchedFields.numero && errors.numero}
-            />
+        <div className={styles.container}>
+            <div className={`${styles.formContainer} ${showInfoBox ? styles.moveLeft : ''}`}>
+                <form onSubmit={handleSubmit}>
+                    <TextInput
+                        label="CEP"
+                        name="cep"
+                        value={cep}
+                        onChange={handleCepChange}
+                        onBlur={handleBlur}
+                        error={erroCep || (errors.cep && touchedFields.cep && errors.cep)}
+                    />
+                    <AddressField
+                        label="Rua/Logradouro"
+                        name="rua"
+                        value={endereco.rua}
+                        disabled={cep.length !== 8 || !!erroCep}
+                        readOnly={cep.length === 8 && !erroCep}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        required
+                        error={errors.rua && touchedFields.rua && errors.rua}
+                    />
+                    <AddressField
+                        label="Número"
+                        name="numero"
+                        value={endereco.numero}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        required
+                        error={errors.numero && touchedFields.numero && errors.numero}
+                    />
 
-            <AddressField
-                label="Complemento"
-                name="complemento"
-                value={endereco.complemento}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                error={errors.complemento && touchedFields.complemento && errors.complemento}
-            />
+                    <AddressField
+                        label="Complemento"
+                        name="complemento"
+                        value={endereco.complemento}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        error={errors.complemento && touchedFields.complemento && errors.complemento}
+                    />
 
-            <AddressField
-                label="Bairro"
-                name="bairro"
-                value={endereco.bairro}
-                disabled={cep.length !== 8 || !!erroCep}
-                readOnly={cep.length === 8 && !erroCep}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                required
-                error={errors.bairro && touchedFields.bairro && errors.bairro}
-            />
+                    <AddressField
+                        label="Bairro"
+                        name="bairro"
+                        value={endereco.bairro}
+                        disabled={cep.length !== 8 || !!erroCep}
+                        readOnly={cep.length === 8 && !erroCep}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        required
+                        error={errors.bairro && touchedFields.bairro && errors.bairro}
+                    />
 
-            <AddressField
-                label="Cidade"
-                name="cidade"
-                value={endereco.cidade}
-                disabled={cep.length !== 8 || !!erroCep}
-                readOnly={cep.length === 8 && !erroCep}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                required
-                error={errors.cidade && touchedFields.cidade && errors.cidade}
-            />
+                    <AddressField
+                        label="Cidade"
+                        name="cidade"
+                        value={endereco.cidade}
+                        disabled={cep.length !== 8 || !!erroCep}
+                        readOnly={cep.length === 8 && !erroCep}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        required
+                        error={errors.cidade && touchedFields.cidade && errors.cidade}
+                    />
 
-            <AddressField
-                label="Estado"
-                name="estado"
-                value={endereco.estado}
-                disabled={cep.length !== 8 || !!erroCep}
-                readOnly={cep.length === 8 && !erroCep}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                required
-                error={errors.estado && touchedFields.estado && errors.estado}
-            />
-            <button type="submit" disabled={!isFormValid}>
-                Enviar
-            </button>
-        </form>
-        {showInfoBox && formData && (
-                <InfoBox
-                    formData={formData}
-                    onClose={() => setShowInfoBox(false)} // Função para fechar a caixa de informações
-                />
+                    <AddressField
+                        label="Estado"
+                        name="estado"
+                        value={endereco.estado}
+                        disabled={cep.length !== 8 || !!erroCep}
+                        readOnly={cep.length === 8 && !erroCep}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        required
+                        error={errors.estado && touchedFields.estado && errors.estado}
+                    />
+                    <button className={styles.submitButton} type="submit" disabled={!isFormValid}>
+                        Enviar
+                    </button>
+                </form>
+            </div>
+            {showInfoBox && formData && (
+                <div className={styles.infoBox}>
+                    <InfoBox
+                        formData={formData}
+                        onClose={() => setShowInfoBox(false)} // Função para fechar a caixa de informações
+                    />
+                </div>
             )}
-
-            {/* Estilização para o degradê preto */}
-            {showInfoBox && <div className="black-gradient"></div>}
         </div>
     );
 };
