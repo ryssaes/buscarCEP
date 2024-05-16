@@ -7,13 +7,13 @@
 }
 
 .formContainer {
-    background-color: rgba(255, 255, 255, 0.95); /* Ajustando a opacidade para um branco mais suave */
-    padding: 30px; /* Aumentando o espaçamento interno */
-    border-radius: 15px; /* Arredondando um pouco mais as bordas */
+    background-color: rgba(255, 255, 255, 0.95); 
+    padding: 30px; 
+    border-radius: 15px; 
     transition: transform 0.5s ease;
     width: 400px;
     max-width: 90%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Adicionando uma sombra mais suave e elevada */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
 }
 
 

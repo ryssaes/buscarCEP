@@ -4,7 +4,7 @@ import { useViaCepService, Endereco } from '../../services/api';
 import TextInput from '../TextInput/TextInput';
 import AddressField from '../AddressField/AddressField';
 import InfoBox from '../InfoBox/InfoBox';
-import styles from './Form.module.css'; // Usando CSS Modules
+import styles from './Form.module.css'; 
 
 const Form = () => {
     const { getAddress } = useViaCepService();
@@ -22,8 +22,8 @@ const Form = () => {
     const [errors, setErrors] = useState<any>({});
     const [touchedFields, setTouchedFields] = useState<any>({});
     const [isFormValid, setIsFormValid] = useState(false);
-    const [showInfoBox, setShowInfoBox] = useState(false); // Estado para controlar a exibição da caixa de informações
-    const [formData, setFormData] = useState<any>(null); // Estado para armazenar os dados do formulário submetido
+    const [showInfoBox, setShowInfoBox] = useState(false); 
+    const [formData, setFormData] = useState<any>(null);
 
     const validateField = (name: string, value: string) => {
         let errorMsg = '';
@@ -138,8 +138,8 @@ const Form = () => {
             ...endereco
         };
 
-        setFormData(data); // Armazenar os dados do formulário submetido
-        setShowInfoBox(true); // Mostrar a caixa de informações
+        setFormData(data); 
+        setShowInfoBox(true); 
     };
 
     return (
@@ -153,7 +153,7 @@ const Form = () => {
                         onChange={handleCepChange}
                         onBlur={handleBlur}
                         error={erroCep || (errors.cep && touchedFields.cep && errors.cep)}
-                        touched={touchedFields.cep} // Adiciona esta linha para passar touched explicitamente
+                        touched={touchedFields.cep}
                     />
                     <AddressField
                         label="Rua/Logradouro"
@@ -232,8 +232,8 @@ const Form = () => {
                         value={endereco.pais}
                         disabled
                         readOnly
-                        onChange={() => { }} // Adiciona uma função vazia para o onChange
-                        onBlur={() => { }} // Adiciona uma função vazia para o onBlur
+                        onChange={() => { }} 
+                        onBlur={() => { }} 
                     />
 
                     <button className={styles.submitButton} type="submit" disabled={!isFormValid}>
@@ -245,7 +245,7 @@ const Form = () => {
                 <div className={styles.infoBox}>
                     <InfoBox
                         formData={formData}
-                        onClose={() => setShowInfoBox(false)} // Função para fechar a caixa de informações
+                        onClose={() => setShowInfoBox(false)} 
                     />
                 </div>
             )}

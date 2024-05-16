@@ -10,7 +10,7 @@ const InfoBox = ({ formData, onClose }: { formData: any; onClose: () => void }) 
                 <p><strong>CEP:</strong> {formData.cep}</p>
                 <p><strong>Rua/Logradouro:</strong> {formData.rua}</p>
                 <p><strong>Número:</strong> {formData.numero}</p>
-                <p><strong>Complemento:</strong> {formData.complemento}</p>
+                <p><strong>Complemento:</strong> {formData.complemento || 'Sem complemento'}</p>
                 <p><strong>Bairro:</strong> {formData.bairro}</p>
                 <p><strong>Cidade:</strong> {formData.cidade}</p>
                 <p><strong>Estado:</strong> {formData.estado}</p>
