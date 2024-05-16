@@ -26,6 +26,8 @@ const TextInput: React.FC<TextInputProps> = ({
     error,
     touched,
 }) => {
+    console.log("Error:", error); // Adiciona este console.log()
+    console.log("Touched:", touched); // Adiciona este console.log()
     return (
         <div className={style.textInputContainer}>
             <label>{label}</label>
@@ -39,7 +41,7 @@ const TextInput: React.FC<TextInputProps> = ({
                 onBlur={onBlur}
                 required={required}
             />
-            {error && touched && <span className={style.errormessage}>{error}</span>}
+            {error && touched && <span className={style.errorMessage}>{error}</span>}
         </div>
     );
 };

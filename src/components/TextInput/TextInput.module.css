@@ -27,7 +27,8 @@
     border-color: #ff0000; /* Cor da borda em caso de erro */
 }
 
-.textInputContainer .errormessage {
+.textInputContainer .errorMessage {
     color: #ff0000; /* Cor do texto de erro */
     font-size: 12px;
+    margin-top: 5px; /* Adiciona um pequeno espaço acima da mensagem de erro */
 }

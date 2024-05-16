@@ -153,6 +153,7 @@ const Form = () => {
                         onChange={handleCepChange}
                         onBlur={handleBlur}
                         error={erroCep || (errors.cep && touchedFields.cep && errors.cep)}
+                        touched={touchedFields.cep} // Adiciona esta linha para passar touched explicitamente
                     />
                     <AddressField
                         label="Rua/Logradouro"
@@ -164,6 +165,7 @@ const Form = () => {
                         onBlur={handleBlur}
                         required
                         error={errors.rua && touchedFields.rua && errors.rua}
+                        touched={touchedFields.rua}
                     />
                     <AddressField
                         label="Número"
@@ -173,6 +175,7 @@ const Form = () => {
                         onBlur={handleBlur}
                         required
                         error={errors.numero && touchedFields.numero && errors.numero}
+                        touched={touchedFields.numero}
                     />
 
                     <AddressField
@@ -182,6 +185,7 @@ const Form = () => {
                         onChange={handleInputChange}
                         onBlur={handleBlur}
                         error={errors.complemento && touchedFields.complemento && errors.complemento}
+                        touched={touchedFields.complemento}
                     />
 
                     <AddressField
@@ -194,6 +198,7 @@ const Form = () => {
                         onBlur={handleBlur}
                         required
                         error={errors.bairro && touchedFields.bairro && errors.bairro}
+                        touched={touchedFields.bairro}
                     />
 
                     <AddressField
@@ -206,6 +211,7 @@ const Form = () => {
                         onBlur={handleBlur}
                         required
                         error={errors.cidade && touchedFields.cidade && errors.cidade}
+                        touched={touchedFields.cidade}
                     />
 
                     <AddressField
@@ -218,6 +224,7 @@ const Form = () => {
                         onBlur={handleBlur}
                         required
                         error={errors.estado && touchedFields.estado && errors.estado}
+                        touched={touchedFields.estado}
                     />
                     <button className={styles.submitButton} type="submit" disabled={!isFormValid}>
                         Enviar
