@@ -1,10 +1,11 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useViaCepService, Endereco } from '../../services/api';
 import TextInput from '../TextInput/TextInput';
 import AddressField from '../AddressField/AddressField';
 import InfoBox from '../InfoBox/InfoBox';
 import FormErrorMessage from '../FormErrorMessage/FormErrorMessage';
+import Button from '../Button/Button';
 import styles from './Form.module.css';
 
 const Form = () => {
@@ -25,7 +26,8 @@ const Form = () => {
     const [isFormValid, setIsFormValid] = useState(false);
     const [showInfoBox, setShowInfoBox] = useState(false);
     const [formData, setFormData] = useState<any>(null);
-
+    const [scrollToInfoBox, setScrollToInfoBox] = useState(false); 
+    const infoBoxRef = useRef<HTMLDivElement>(null);
 
     const validateField = (name: string, value: string) => {
         let errorMsg = '';
@@ -144,7 +146,15 @@ const Form = () => {
 
         setFormData(data);
         setShowInfoBox(true);
+        setScrollToInfoBox(true);
     };
+    useEffect(() => {
+        if (scrollToInfoBox && infoBoxRef.current) {
+            infoBoxRef.current.scrollIntoView({ behavior: 'smooth' });
+            setScrollToInfoBox(false); 
+        }
+    }, [scrollToInfoBox]);
+
 
     return (
         <div className={styles.container}>
@@ -262,17 +272,19 @@ const Form = () => {
                         aria-invalid="false"
                     />
 
-                    <button className={styles.submitButton} type="submit" disabled={!isFormValid}>
+                    <Button type="submit" disabled={!isFormValid} className={styles.submitButton} onClick={() => { }}>
                         Enviar
-                    </button>
+                    </Button>
                     <FormErrorMessage endereco={endereco} />
                 </form>
             </div>
             {showInfoBox && formData && (
+                <div ref={infoBoxRef}> 
                 <InfoBox
                     formData={formData}
                     onClose={() => setShowInfoBox(false)}
                 />
+            </div>
             )}
         </div>
     );
