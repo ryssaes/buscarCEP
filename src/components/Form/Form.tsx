@@ -6,9 +6,10 @@ import AddressField from '../AddressField/AddressField';
 import InfoBox from '../InfoBox/InfoBox';
 import FormErrorMessage from '../FormErrorMessage/FormErrorMessage';
 import Button from '../Button/Button';
+import { validateCep, validateNumero, validateAlphabetic } from '../../utils/validation';
 import styles from './Form.module.css';
 
-const Form = () => {
+const Form: React.FC = () => {
     const { getAddress } = useViaCepService();
     const [cep, setCep] = useState('');
     const [endereco, setEndereco] = useState<Endereco>({
@@ -26,21 +27,21 @@ const Form = () => {
     const [isFormValid, setIsFormValid] = useState(false);
     const [showInfoBox, setShowInfoBox] = useState(false);
     const [formData, setFormData] = useState<any>(null);
-    const [scrollToInfoBox, setScrollToInfoBox] = useState(false); 
+    const [scrollToInfoBox, setScrollToInfoBox] = useState(false);
     const infoBoxRef = useRef<HTMLDivElement>(null);
 
     const validateField = (name: string, value: string) => {
         let errorMsg = '';
         if (name === 'cep') {
-            if (!/^\d{8}$/.test(value)) {
+            if (!validateCep(value)) {
                 errorMsg = 'CEP inválido. Deve conter 8 dígitos numéricos.';
             }
         } else if (name === 'numero') {
-            if (!/^\d+$/.test(value)) {
+            if (!validateNumero(value)) {
                 errorMsg = 'Número inválido. Deve conter apenas dígitos numéricos.';
             }
         } else if (name === 'rua' || name === 'bairro' || name === 'cidade' || name === 'estado') {
-            if (!/^[a-zA-Z\s]+$/.test(value.trim())) {
+            if (!validateAlphabetic(value)) {
                 errorMsg = 'Este campo deve conter apenas letras.';
             } else if (!value.trim()) {
                 errorMsg = 'Este campo é obrigatório';
@@ -72,7 +73,7 @@ const Form = () => {
         const newCep = event.target.value;
         setCep(newCep);
         validateField('cep', newCep);
-        if (newCep.length === 8 && /^\d{8}$/.test(newCep)) {
+        if (newCep.length === 8 && validateCep(newCep)) {
             try {
                 const data = await getAddress(newCep);
                 console.log('Dados da API:', data);
@@ -151,14 +152,14 @@ const Form = () => {
     useEffect(() => {
         if (scrollToInfoBox && infoBoxRef.current) {
             infoBoxRef.current.scrollIntoView({ behavior: 'smooth' });
-            setScrollToInfoBox(false); 
+            setScrollToInfoBox(false);
         }
     }, [scrollToInfoBox]);
 
 
     return (
         <div className={styles.container}>
-            <div className={`${styles.formContainer} ${showInfoBox ? styles.moveLeft : ''}`}>
+            <div className={`${styles.formContainer} `}>
                 <form onSubmit={handleSubmit}>
                     <TextInput
                         label="CEP"
@@ -208,9 +209,9 @@ const Form = () => {
                         onChange={handleInputChange}
                         onBlur={handleBlur}
                         error={errors.complemento && touchedFields.complemento && errors.complemento}
-                        touched={touchedFields.complemento}
-                        aria-label="Complemento"
-                        aria-invalid={!!errors.complemento && touchedFields.complemento && errors.complemento ? 'true' : 'false'}
+                    touched={touchedFields.complemento}
+                    aria-label="Complemento"
+                    aria-invalid={!!errors.complemento && touchedFields.complemento && errors.complemento ? 'true' : 'false'}
                     />
 
                     <AddressField
@@ -279,15 +280,16 @@ const Form = () => {
                 </form>
             </div>
             {showInfoBox && formData && (
-                <div ref={infoBoxRef}> 
-                <InfoBox
-                    formData={formData}
-                    onClose={() => setShowInfoBox(false)}
-                />
-            </div>
+                <div ref={infoBoxRef}>
+                    <InfoBox
+                        formData={formData}
+                        onClose={() => setShowInfoBox(false)}
+                    />
+                </div>
             )}
         </div>
     );
 };
 
 export default Form;
+
