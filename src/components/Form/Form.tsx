@@ -158,6 +158,9 @@ const Form = () => {
                         onBlur={handleBlur}
                         error={erroCep || (errors.cep && touchedFields.cep && errors.cep)}
                         touched={touchedFields.cep}
+                        aria-label="CEP"
+                        aria-required={true}
+                        aria-invalid={!!erroCep || (errors.cep && touchedFields.cep && errors.cep) ? 'true' : 'false'}
                     />
                     <AddressField
                         label="Rua/Logradouro"
@@ -170,6 +173,9 @@ const Form = () => {
                         required
                         error={errors.rua && touchedFields.rua && errors.rua}
                         touched={touchedFields.rua}
+                        aria-label="Rua ou logradouro"
+                        aria-required={true}
+                        aria-invalid={!!errors.rua && touchedFields.rua && errors.rua ? 'true' : 'false'}
                     />
                     <AddressField
                         label="Número"
@@ -180,6 +186,9 @@ const Form = () => {
                         required
                         error={errors.numero && touchedFields.numero && errors.numero}
                         touched={touchedFields.numero}
+                        aria-label="Número"
+                        aria-required={true}
+                        aria-invalid={!!errors.numero && touchedFields.numero && errors.numero ? 'true' : 'false'}
                     />
 
                     <AddressField
@@ -190,6 +199,8 @@ const Form = () => {
                         onBlur={handleBlur}
                         error={errors.complemento && touchedFields.complemento && errors.complemento}
                         touched={touchedFields.complemento}
+                        aria-label="Complemento"
+                        aria-invalid={!!errors.complemento && touchedFields.complemento && errors.complemento ? 'true' : 'false'}
                     />
 
                     <AddressField
@@ -203,6 +214,9 @@ const Form = () => {
                         required
                         error={errors.bairro && touchedFields.bairro && errors.bairro}
                         touched={touchedFields.bairro}
+                        aria-label="Bairro"
+                        aria-required={true}
+                        aria-invalid={!!errors.bairro && touchedFields.bairro && errors.bairro ? 'true' : 'false'}
                     />
 
                     <AddressField
@@ -216,8 +230,10 @@ const Form = () => {
                         required
                         error={errors.cidade && touchedFields.cidade && errors.cidade}
                         touched={touchedFields.cidade}
+                        aria-label="Cidade"
+                        aria-required={true}
+                        aria-invalid={!!errors.cidade && touchedFields.cidade && errors.cidade ? 'true' : 'false'}
                     />
-
                     <AddressField
                         label="Estado"
                         name="estado"
@@ -229,6 +245,9 @@ const Form = () => {
                         required
                         error={errors.estado && touchedFields.estado && errors.estado}
                         touched={touchedFields.estado}
+                        aria-label="Estado"
+                        aria-required={true}
+                        aria-invalid={!!errors.estado && touchedFields.estado && errors.estado ? 'true' : 'false'}
                     />
                     <AddressField
                         label="País"
@@ -238,6 +257,9 @@ const Form = () => {
                         readOnly
                         onChange={() => { }}
                         onBlur={() => { }}
+                        aria-label="País"
+                        aria-required={false}
+                        aria-invalid="false"
                     />
 
                     <button className={styles.submitButton} type="submit" disabled={!isFormValid}>

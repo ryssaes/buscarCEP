@@ -38,6 +38,8 @@ const AddressField: React.FC<AddressFieldProps> = ({
             required={required}
             error={error}
             touched={touched}
+            aria-label={label}
+            aria-invalid={touched && error ? 'true' : 'false'} 
         />
     );
 };

@@ -30,7 +30,7 @@ const FormErrorMessage = ({ endereco }) => {
     };
 
     return (
-        <p className={styles.errorMsg}>{generateErrorMessage()}</p>
+        <p className={styles.errorMsg} aria-live="assertive" role="alert">{generateErrorMessage()}</p>
     );
 };
 

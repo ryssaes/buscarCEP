@@ -38,6 +38,8 @@ const TextInput: React.FC<TextInputProps> = ({
                 onChange={onChange}
                 onBlur={onBlur}
                 required={required}
+                aria-label={label}
+                aria-invalid={touched && error ? 'true' : 'false'}
             />
             {error && touched && <span className={style.errorMessage}>{error}</span>}
         </div>
